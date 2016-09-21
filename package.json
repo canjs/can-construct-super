@@ -1,0 +1,72 @@
+{
+  "name": "can-construct-super",
+  "version": "3.0.0-pre",
+  "description": "Provides a reference to the prototypal parent using this._super in can-construct objects",
+  "main": "can-construct-super",
+  "scripts": {
+    "preversion": "npm test && npm run build",
+    "version": "git commit -am \"Update dist for release\" && git checkout -b release && git add -f dist/",
+    "postversion": "git push --tags && git checkout master && git branch -D release && git push",
+    "testee": "testee test/test.html --browsers firefox",
+    "test": "npm run jshint && npm run testee",
+    "jshint": "jshint ./*.js --config",
+    "release:pre": "npm version prerelease && npm publish",
+    "release:patch": "npm version patch && npm publish",
+    "release:minor": "npm version minor && npm publish",
+    "release:major": "npm version major && npm publish",
+    "build": "node build.js",
+    "document": "bit-docs",
+    "develop": "done-serve --static --develop --port 8080"
+  },
+  "keywords": [
+    "canjs",
+    "donejs"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/canjs/can-construct-super.git"
+  },
+  "author": "Bitovi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/canjs/can-construct-super/issues"
+  },
+  "homepage": "https://github.com/canjs/can-construct-super#readme",
+  "dependencies": {
+    "can-construct": "^3.0.0-pre.8",
+    "can-util": "^3.0.0-pre.54",
+    "steal": "^0.16.35"
+  },
+  "devDependencies": {
+    "bit-docs": "0.0.7",
+    "jshint": "^2.9.3",
+    "steal-qunit": "^0.1.3",
+    "testee": "^0.3.0-pre.1"
+  },
+  "system": {
+    "main": "can-construct-super",
+    "npmIgnore": [
+      "documentjs",
+      "testee",
+      "generator-donejs",
+      "donejs-cli",
+      "steal-tools"
+    ]
+  },
+  "bit-docs": {
+    "dependencies": {
+      "bit-docs-glob-finder": "^0.0.5",
+      "bit-docs-dev": "^0.0.3",
+      "bit-docs-js": "^0.0.3",
+      "bit-docs-generate-readme": "^0.0.8"
+    },
+    "glob": {
+      "pattern": "can-construct-super.md",
+      "ignore": "node_modules/**/*"
+    },
+    "readme": {
+      "apis": "./docs/apis.json"
+    },
+    "parent": "can-stache-bindings"
+  }
+}
