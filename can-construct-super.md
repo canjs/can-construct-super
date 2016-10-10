@@ -1,5 +1,5 @@
 @module can-construct-super
-@parent can-construct.plugins
+@parent can-ecosystem
 @plugin can-construct-super
 
 can.Construct.super is a plugin that makes it easier to call base
