@@ -1,6 +1,6 @@
 {
   "name": "can-construct-super",
-  "version": "3.0.0-pre.0",
+  "version": "3.0.0-pre.1",
   "description": "Provides a reference to the prototypal parent using this._super in can-construct objects",
   "main": "can-construct-super",
   "scripts": {
