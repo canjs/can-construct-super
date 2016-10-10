@@ -16,9 +16,9 @@ With this plugin, functions that are inheriting from base functions
 are provided with a specialized `this._super` reference to the base
 function from which they inherit.
 
-This is especially useful for calling base classes' `[can-construct::init init]` and `[can-construct::setup setup]`, but it can be used in any inheriting function.
+This is especially useful for calling base classes' [init](/canjs/can-construct#constructinitargs) and [setup](/canjs/can-construct#constructsetupbase-fullname-staticprops-protoprops), but it can be used in any inheriting function.
 
-The `Person` and `Programmer` examples from `[can-construct::init init]` demonstrate `_super`'s use.
+The `Person` and `Programmer` examples from [init](/canjs/can-construct#constructinitargs) demonstrate `_super`'s use.
 Here's how those classes look without can.Construct.super:
 
 ```
