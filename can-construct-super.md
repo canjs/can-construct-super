@@ -1,6 +1,7 @@
 @module can-construct-super
 @parent can-ecosystem
 @plugin can-construct-super
+@package ./package.json
 
 can.Construct.super is a plugin that makes it easier to call base
 functions from inside inheriting functions.
