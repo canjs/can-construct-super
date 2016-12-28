@@ -40,8 +40,16 @@ Construct._defineProperty = function(addTo, base, name, descriptor) {
 // overwrites a single property so it can still call super
 Construct._overwrite = function (addTo, base, name, val) {
 	// Check if we're overwriting an existing function
-	addTo[name] = isFunction(val) && isFunction(base[name]) && fnTest.test(val) ?
-		getSuper(base, name, val) : val;
+	var baseDescriptor = Object.getOwnPropertyDescriptor(base, name);
+	var baseValue = baseDescriptor && baseDescriptor.value;
+
+	Object.defineProperty(addTo, name, {
+		value: isFunction(val) && isFunction(baseValue) && fnTest.test(val) ?
+				getSuper(base, name, val) : val,
+		configurable: true,
+		enumerable: true,
+		writable: true
+	});
 };
 
 module.exports = Construct;
