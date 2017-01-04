@@ -37,10 +37,26 @@ Construct._defineProperty = function(addTo, base, name, descriptor) {
 	Object.defineProperty(addTo, name, descriptor);
 };
 
+var getPrototypeOf = Object.getPrototypeOf || function(obj){
+	return obj.__proto__; // jshint ignore:line
+};
+
+var getPropertyDescriptor = Object.getPropertyDescriptor || function(subject, name) {
+	if(name in subject) {
+		var pd = Object.getOwnPropertyDescriptor(subject, name);
+		var proto = getPrototypeOf(subject);
+		while (pd === undefined && proto !== null) {
+			pd = Object.getOwnPropertyDescriptor(proto, name);
+			proto = getPrototypeOf(proto);
+		}
+		return pd;
+	}
+};
+
 // overwrites a single property so it can still call super
 Construct._overwrite = function (addTo, base, name, val) {
 	// Check if we're overwriting an existing function
-	var baseDescriptor = Object.getOwnPropertyDescriptor(base, name);
+	var baseDescriptor = getPropertyDescriptor(base, name);
 	var baseValue = baseDescriptor && baseDescriptor.value;
 
 	Object.defineProperty(addTo, name, {

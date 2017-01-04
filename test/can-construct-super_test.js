@@ -111,3 +111,16 @@ QUnit.test("setters not invoked on extension (#9)", function(){
 	extending = false;
 	new Base().something = "foo";
 });
+
+QUnit.test("_super isn't always available (#11)", function(){
+	var Parent = Construct.extend({
+	});
+
+	var Child = Parent.extend({
+		init: function () {
+			this._super();
+			ok(true);
+		}
+	});
+	new Child();
+});
