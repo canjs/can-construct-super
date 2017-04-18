@@ -124,3 +124,27 @@ QUnit.test("_super isn't always available (#11)", function(){
 	});
 	new Child();
 });
+
+QUnit.test("_super should work for sealed instances", function () {
+	var A = Construct.extend({
+		init: function (arg) {
+			this.arg = arg + 1;
+		},
+		add: function (num) {
+			return this.arg + num;
+		}
+	});
+	var B = A({
+		init: function (arg) {
+			this._super(arg + 2);
+		},
+		add: function (arg) {
+			console.log(this)
+			return this._super(arg + 1);
+		}
+	});
+	var b = new B(1);
+	Object.seal(b);
+	equal(b.arg, 4, 'should instantiate properly');
+	equal(b.add(2), 7, 'should call methods properly');
+});

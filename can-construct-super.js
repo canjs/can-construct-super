@@ -1,6 +1,7 @@
 /* global require, module */
 var can = require('can-util');
 var Construct = require('can-construct');
+var hasOwnProperty = Object.prototype.hasOwnProperty;
 // tests if we can get super in .toString()
 var isFunction = can.isFunction,
 	fnTest = /xyz/.test(function () {
@@ -9,15 +10,34 @@ var isFunction = can.isFunction,
 	getset = ['get', 'set'],
 	getSuper = function (base, name, fn) {
 		return function () {
-			var tmp = this._super,
-				ret;
-			// Add a new ._super() method that is the same method
-			// but on the super-class
-			this._super = base[name];
+			var hasExistingValue = false;
+			var existingValue;
+			var prototype = getPrototypeOf(this);
+			var existingPrototypeValue = prototype._super;
+
+			/* We must delete the instance's _super so the lookup
+					will reach the prototype. */
+			if (hasOwnProperty.call(this, '_super')) {
+				hasExistingValue = true;
+				existingValue = this._super;
+				/* NOTE: if the object is sealed this will not work.
+						The '_super' key cannot be used on the instance
+						in that rare case. */
+				delete this._super;
+			}
+
+			/* Add a new ._super() method that is the same method
+					but on the super-class. It must be set on the prototype
+					because the instance may be sealed. */
+			prototype._super = base[name];
+
 			// The method only need to be bound temporarily, so we
 			// remove it when we're done executing
-			ret = fn.apply(this, arguments);
-			this._super = tmp;
+			var ret = fn.apply(this, arguments);
+			prototype._super = existingPrototypeValue;
+			if (hasExistingValue) {
+				this._super = existingValue;
+			}
 			return ret;
 		};
 	};
