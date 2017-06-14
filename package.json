@@ -33,8 +33,8 @@
   },
   "homepage": "https://github.com/canjs/can-construct-super#readme",
   "dependencies": {
-    "can-construct": "^3.0.0",
-    "can-util": "^3.0.0"
+    "can-construct": "^3.2.0-pre.0",
+    "can-util": "^3.9.0-pre.4"
   },
   "devDependencies": {
     "bit-docs": "0.0.7",
