@@ -15,7 +15,6 @@
     "release:minor": "npm version minor && npm publish",
     "release:major": "npm version major && npm publish",
     "build": "node build.js",
-    "document": "bit-docs",
     "develop": "done-serve --static --develop --port 8080"
   },
   "keywords": [
@@ -53,21 +52,5 @@
       "donejs-cli",
       "steal-tools"
     ]
-  },
-  "bit-docs": {
-    "dependencies": {
-      "bit-docs-glob-finder": "^0.0.5",
-      "bit-docs-dev": "^0.0.3",
-      "bit-docs-js": "^0.0.3",
-      "bit-docs-generate-readme": "^0.0.8"
-    },
-    "glob": {
-      "pattern": "can-construct-super.md",
-      "ignore": "node_modules/**/*"
-    },
-    "readme": {
-      "apis": "./docs/apis.json"
-    },
-    "parent": "can-stache-bindings"
   }
 }
