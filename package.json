@@ -36,7 +36,7 @@
     "can-util": "^3.9.0"
   },
   "devDependencies": {
-    "bit-docs": "0.0.7",
+    "bit-docs": "0.0.8-1",
     "jshint": "^2.9.3",
     "steal": "^1.2.8",
     "steal-qunit": "^1.0.1",
