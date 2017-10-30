@@ -139,7 +139,6 @@ QUnit.test("_super should work for sealed instances", function () {
 			this._super(arg + 2);
 		},
 		add: function (arg) {
-			console.log(this)
 			return this._super(arg + 1);
 		}
 	});
