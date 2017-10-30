@@ -1,5 +1,6 @@
 @module can-construct-super
-@parent can-ecosystem
+@parent can-typed-data
+@collection can-ecosystem
 @plugin can-construct-super
 @package ./package.json
 
