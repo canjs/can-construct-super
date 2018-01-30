@@ -1,9 +1,10 @@
 /* global require, module */
-var can = require('can-util');
+var canIsFunction = require('can-util/js/is-function/is-function');
+var canEach = require('can-util/js/each/each');
 var Construct = require('can-construct');
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 // tests if we can get super in .toString()
-var isFunction = can.isFunction,
+var isFunction = canIsFunction,
 	fnTest = /xyz/.test(function () {
 		return this.xyz;
 	}) ? /\b_super\b/ : /.*/,
@@ -45,7 +46,7 @@ var isFunction = can.isFunction,
 Construct._defineProperty = function(addTo, base, name, descriptor) {
 	var _super = Object.getOwnPropertyDescriptor(base, name);
 	if(_super) {
-		can.each(getset, function (method) {
+		canEach(getset, function (method) {
 			if(isFunction(_super[method]) && isFunction(descriptor[method])) {
 				descriptor[method] = getSuper(_super, method, descriptor[method]);
 			} else if(!isFunction(descriptor[method])) {
