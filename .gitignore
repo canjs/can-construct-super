@@ -33,3 +33,4 @@ node_modules
 doc/
 dist/
 .idea/
+package-lock.json
