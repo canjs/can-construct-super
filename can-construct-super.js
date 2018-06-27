@@ -1,3 +1,4 @@
+"use strict";
 /* global require, module */
 var canIsFunction = require('can-util/js/is-function/is-function');
 var canEach = require('can-util/js/each/each');
