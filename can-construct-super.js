@@ -47,7 +47,7 @@ var isFunction = function(val) {
 Construct._defineProperty = function(addTo, base, name, descriptor) {
 	var _super = Object.getOwnPropertyDescriptor(base, name);
 	if(_super) {
-		canReflect.eachKey(getset, function (method) {
+		canReflect.each(getset, function (method) {
 			if(isFunction(_super[method]) && isFunction(descriptor[method])) {
 				descriptor[method] = getSuper(_super, method, descriptor[method]);
 			} else if(!isFunction(descriptor[method])) {
