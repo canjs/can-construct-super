@@ -1,3 +1,4 @@
+"use strict";
 /* global require, module */
 var canReflect = require('can-reflect');
 var Construct = require('can-construct');
