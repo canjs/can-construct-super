@@ -3,7 +3,7 @@ var Construct = require("can-construct-super");
 var QUnit = require("steal-qunit");
 
 QUnit.module('can-construct-super');
-test('prototype super', function () {
+QUnit.test('prototype super', function(assert) {
 	var A = Construct.extend({
 		init: function (arg) {
 			this.arg = arg + 1;
@@ -21,10 +21,10 @@ test('prototype super', function () {
 		}
 	});
 	var b = new B(1);
-	equal(b.arg, 4);
-	equal(b.add(2), 7);
+	assert.equal(b.arg, 4);
+	assert.equal(b.add(2), 7);
 });
-test('static super', function () {
+QUnit.test('static super', function(assert) {
 	var First = Construct.extend({
 		raise: function (num) {
 			return num;
@@ -35,12 +35,12 @@ test('static super', function () {
 			return this._super(num) * num;
 		}
 	}, {});
-	equal(Second.raise(2), 4);
+	assert.equal(Second.raise(2), 4);
 });
-test('findAll super', function () {
+QUnit.test('findAll super', function(assert) {
 	var Parent = Construct.extend({
 		findAll: function () {
-			equal(this.shortName, 'child');
+			assert.equal(this.shortName, 'child');
 			return Promise.resolve();
 		},
 		shortName: 'parent'
@@ -51,16 +51,16 @@ test('findAll super', function () {
 		},
 		shortName: 'child'
 	}, {});
-	stop();
-	expect(1);
+	var done = assert.async();
+	assert.expect(1);
 	Child.findAll({});
-	start();
+	done();
 });
 //!steal-remove-start
 // To avoid JSHint complaining about the missing getter
 /* jshint ignore:start */
 if(Object.getOwnPropertyDescriptor) {
-	test("_super supports getters and setters", function () {
+	QUnit.test("_super supports getters and setters", function(assert) {
 		var Person = Construct.extend({
 			get age() {
 				return 42;
@@ -87,21 +87,21 @@ if(Object.getOwnPropertyDescriptor) {
 
 		var test = new OtherPerson();
 		test.base = 2;
-		equal(test.age, 50, 'Getter and _super works');
+		assert.equal(test.age, 50, 'Getter and _super works');
 		test.name = 'David';
-		equal(test.name, 'David_super', 'Setter ran');
+		assert.equal(test.name, 'David_super', 'Setter ran');
 	});
 }
 
-QUnit.test("setters not invoked on extension (#9)", function(){
+QUnit.test("setters not invoked on extension (#9)", function(assert) {
 
 	var extending = true;
 	var Base = Construct.extend("Base",{
 		set something(value){
-			QUnit.ok(!extending, "set not called when not extending");
+			assert.ok(!extending, "set not called when not extending");
 		},
 		get something(){
-			QUnit.ok(!extending, "get not called when not extending");
+			assert.ok(!extending, "get not called when not extending");
 		}
 	});
 
@@ -112,20 +112,20 @@ QUnit.test("setters not invoked on extension (#9)", function(){
 	new Base().something = "foo";
 });
 
-QUnit.test("_super isn't always available (#11)", function(){
+QUnit.test("_super isn't always available (#11)", function(assert) {
 	var Parent = Construct.extend({
 	});
 
 	var Child = Parent.extend({
 		init: function () {
 			this._super();
-			ok(true);
+			assert.ok(true);
 		}
 	});
 	new Child();
 });
 
-QUnit.test("_super should work for sealed instances", function () {
+QUnit.test("_super should work for sealed instances", function(assert) {
 	var A = Construct.extend({
 		init: function (arg) {
 			this.arg = arg + 1;
@@ -144,6 +144,6 @@ QUnit.test("_super should work for sealed instances", function () {
 	});
 	var b = new B(1);
 	Object.seal(b);
-	equal(b.arg, 4, 'should instantiate properly');
-	equal(b.add(2), 7, 'should call methods properly');
+	assert.equal(b.arg, 4, 'should instantiate properly');
+	assert.equal(b.add(2), 7, 'should call methods properly');
 });
