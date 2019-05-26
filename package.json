@@ -34,7 +34,7 @@
   "homepage": "https://github.com/canjs/can-construct-super#readme",
   "dependencies": {
     "can-construct": "^3.2.0",
-    "can-reflect": "^1.6.0"
+    "can-reflect": "^1.17.11"
   },
   "devDependencies": {
     "bit-docs": "0.0.7",
