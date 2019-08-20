@@ -83,7 +83,7 @@ Construct._overwrite = function (addTo, base, name, val) {
 	var baseValue = baseDescriptor && baseDescriptor.value;
 
 	Object.defineProperty(addTo, name, {
-		value: isFunction(val) && isFunction(baseValue) && fnTest.test(val) ?
+		value: isFunction(val) && isFunction(baseValue) ?
 				getSuper(base, name, val) : val,
 		configurable: true,
 		enumerable: true,
